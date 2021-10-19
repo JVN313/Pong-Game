@@ -48,34 +48,24 @@ def paddle_a_down():
     y -= 37
     paddle_a.sety(y)
 
-# def paddle_b_up():
-#     y = paddle_b.ycor()
-#     y += 2
-#     paddle_b.sety(y)
+def paddle_b_up():
+     y = paddle_b.ycor()
+     y += 37
+     paddle_b.sety(y)
 
-# def paddle_b_down():
-#     y = paddle_b.ycor()
-#     y -= 2
-#     paddle_b.sety(y)
+def paddle_b_down():
+     y = paddle_b.ycor()
+     y -= 37
+     paddle_b.sety(y)
 
 # Key Presses
 game_window.listen()
-game_window.onkeypress(paddle_a_up, "Up")
-game_window.onkeypress(paddle_a_down, "Down")
-
+game_window.onkeypress(paddle_a_up, "w")
+game_window.onkeypress(paddle_a_down, "s")
+game_window.onkeypress(paddle_b_up, "Up")
+game_window.onkeypress(paddle_b_down, "Down")
 # Game Loop
 while True:
-    
-    # Paddle B Movement
-    paddle_b.sety(paddle_b.ycor() + paddle_b.yspeed)
-
-    if paddle_b.ycor() > 250:
-        paddle_b.sety(250)
-        paddle_b.yspeed *= -1
-
-    if paddle_b.ycor() < -250:
-        paddle_b.sety(-250)
-        paddle_b.yspeed *= -1
 
     # Ball Movement
     ball.setx(ball.xcor() + ball.xspeed)
@@ -96,6 +86,5 @@ while True:
     if ball.xcor() < -390:
         ball.goto(0,0)
         ball.xspeed *= -1
-
 
     game_window.update()
