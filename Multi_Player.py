@@ -34,8 +34,8 @@ ball.shape("circle") # default value is 20px
 ball.color("white")
 ball.penup()
 ball.goto(0,0)
-ball.xspeed = 1
-ball.yspeed = -1
+ball.xspeed = 0.5
+ball.yspeed = -0.5
 
 # Functions
 def paddle_a_up():
@@ -99,6 +99,15 @@ while True:
 
     if ball.xcor() < -390:
         ball.goto(0,0)
+        ball.xspeed *= -1
+
+    # Bounce
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
+        ball.setx(340)
+        ball.xspeed *= -1
+
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
+        ball.setx(-340)
         ball.xspeed *= -1
 
     game_window.update()
