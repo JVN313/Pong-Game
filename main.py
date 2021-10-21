@@ -1,4 +1,5 @@
 import turtle
+
 # Game Window Setup
 game_window = turtle.Screen()
 game_window.title("Pong in Turtle")
@@ -76,6 +77,13 @@ while True:
     if paddle_b.ycor() < -250:
         paddle_b.sety(-250)
         paddle_b.yspeed *= -1
+    
+    # Paddle A Border
+    if paddle_a.ycor() > 250:
+        paddle_a.sety(250)
+
+    if paddle_a.ycor() < -250:
+        paddle_a.sety(-250)
 
     # Ball Movement
     ball.setx(ball.xcor() + ball.xspeed)
