@@ -67,6 +67,20 @@ game_window.onkeypress(paddle_b_down, "Down")
 # Game Loop
 while True:
 
+    # Paddle A Border
+    if paddle_a.ycor() > 250:
+        paddle_a.sety(250)
+
+    if paddle_a.ycor() < -250:
+        paddle_a.sety(-250)
+    
+    # Paddle B Border
+    if paddle_b.ycor() > 250:
+        paddle_b.sety(250)
+
+    if paddle_b.ycor() < -250:
+        paddle_b.sety(-250)
+    
     # Ball Movement
     ball.setx(ball.xcor() + ball.xspeed)
     ball.sety(ball.ycor() + ball.yspeed)
