@@ -25,8 +25,8 @@ paddle_b.color("white")
 paddle_b.shapesize(stretch_wid=5 ,stretch_len=1)
 paddle_b.penup()
 paddle_b.goto(350,0)
-paddle_b.xspeed = 1.2
-paddle_b.yspeed = 1.2
+paddle_b.xspeed = 1
+paddle_b.yspeed = 1.1
 
 # Ball
 ball= turtle.Turtle()
@@ -35,8 +35,19 @@ ball.shape("circle") # default value is 20px
 ball.color("white")
 ball.penup()
 ball.goto(0,0)
-ball.xspeed = 1
-ball.yspeed = -1
+ball.xspeed = 0.4
+ball.yspeed = -0.4
+
+# Pen / Scoreboard
+score_a = 0
+score_b =0
+pen = turtle.Turtle()
+pen.speed(0)
+pen.penup()
+pen.color("white")
+pen.hideturtle()
+pen.goto(0,260)
+pen.write(f"Player A: {score_a}   Player B: {score_b}", align="center", font=("Courier",24,"normal"))
 
 # Functions
 def paddle_a_up():
@@ -96,14 +107,31 @@ while True:
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.yspeed *= -1
+        score_b += 1
+        pen.clear()
+        pen.write(f"Player A: {score_a}   Player B: {score_b}", align="center", font=("Courier",24,"normal"))
 
-    if ball.xcor() > 390:
-        ball.goto(0,0)
+    if ball.xcor() > 398:
+        ball.goto(200,0)
+        ball.xspeed *= -1
+        score_a += 1
+        pen.clear()
+        pen.write(f"Player A: {score_a}   Player B: {score_b}", align="center", font=("Courier",24,"normal"))
+
+
+    if ball.xcor() < -398:
+        ball.goto(-200,0)
         ball.xspeed *= -1
 
-    if ball.xcor() < -390:
-        ball.goto(0,0)
+    # Ball & Paddle Collisions
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 40 and ball.ycor() > paddle_b.ycor() - 40):
+        ball.setx(340)
         ball.xspeed *= -1
+
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 40 and ball.ycor() > paddle_a.ycor() - 40):
+        ball.setx(-340)
+        ball.xspeed *= -1
+
 
 
     game_window.update()
